@@ -5,3 +5,4 @@ gradio>=4.0.0
 flask>=2.0.0
 numpy>=1.20.0
 tqdm>=4.64.0
+streamlit

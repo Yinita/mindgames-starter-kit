@@ -106,8 +106,8 @@ class GameManager:
         if self.env is None:
             raise RuntimeError("请先使用setup_game()设置游戏环境")
         
-        if not isinstance(agent, Agent):
-            raise TypeError("添加的代理必须是 Agent 类型")
+        # if not isinstance(agent, Agent):
+        #     raise TypeError("添加的代理必须是 Agent 类型")
         
         if player_id is None:
             # 分配下一个可用ID

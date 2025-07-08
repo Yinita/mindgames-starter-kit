@@ -139,8 +139,11 @@ class OpenAIAgent(Agent):
         self.model_name = model_name or self.config.get_openai_model()
         
         # 检查API密钥是否已设置
-        if not self.config.get_openai_api_key():
-            raise ValueError("OpenAI API key is not set. Set it using the api_key parameter or OPENAI_API_KEY environment variable.")
+        api_key = self.config.get_openai_api_key()
+        if not api_key or api_key == "":
+            print("Warning: OpenAI API key is not set. If needed, set it using the api_key parameter or OPENAI_API_KEY environment variable.")
+            # 当使用默认设置的"123"作为空密钥标记
+            self.config._openai_api_key = "123"
         
         self.system_prompt = STANDARD_GAME_PROMPT
         
@@ -156,7 +159,7 @@ class OpenAIAgent(Agent):
                 client = OpenAI(
                     azure_endpoint=self.config.get_openai_base_url(),
                     api_key=self.config.get_openai_api_key(),
-                    api_version="2025-01-01-preview",  # 使用稳定的API版本
+                    api_version="2025-01-01-preview", 
                 )
                 print(f"Initialized Azure OpenAI client with endpoint: {self.config.get_openai_base_url()}")
             else:
