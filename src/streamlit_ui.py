@@ -295,6 +295,13 @@ def submit_human_action(action: str):
             
         st.success("动作已提交成功!")
         
+        # 如果游戏没有结束，自动继续执行AI玩家的回合
+        if not game_over:
+            # 使用延迟来确保成功消息能显示出来
+            time.sleep(0.5)
+            # 继续执行游戏步骤，处理AI玩家的回合
+            advance_game_step()
+        
     except Exception as e:
         st.error(f"提交动作时出错: {str(e)}")
         st.exception(e)
